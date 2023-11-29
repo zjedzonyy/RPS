@@ -1,25 +1,19 @@
-var weapons = ["ROCK", "PAPER", "SCISSORS"];
+const weapons = ["ROCK", "PAPER", "SCISSORS"];
 
 function getComputerChoice() {
   return weapons[Math.floor(Math.random() * weapons.length)];
 }
 
-function playSingleRound() {
-  const computerSelection = getComputerChoice();
-  const playerSelection = prompt("Choose your weapon: ").toUpperCase();
-
+function playSingleRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    console.log("It's a tie!");
     return "tie";
   } else if (
     (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
     (playerSelection === "PAPER" && computerSelection === "ROCK") ||
     (playerSelection === "SCISSORS" && computerSelection === "PAPER")
   ) {
-    console.log("Player wins!");
     return "player";
   } else {
-    console.log("Computer wins!");
     return "computer";
   }
 }
@@ -29,7 +23,10 @@ function game() {
     computerScore = 0;
 
   for (let i = 0; i < 5; i++) {
-    const winner = playSingleRound();
+    const playerSelection = prompt("Choose your weapon: ").toUpperCase();
+    const computerSelection = getComputerChoice();
+    const winner = playSingleRound(playerSelection, computerSelection);
+
     if (winner === "player") {
       playerScore++;
     } else if (winner === "computer") {
