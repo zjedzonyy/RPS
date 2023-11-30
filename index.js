@@ -1,48 +1,78 @@
-const weapons = ["ROCK", "PAPER", "SCISSORS"];
+const weapons = ["ROCK", "PAPER", "SCISSORS"]; // Lista broni dla komputera
 
+// wylosuj broń dla komputera
 function getComputerChoice() {
   return weapons[Math.floor(Math.random() * weapons.length)];
 }
 
-function playSingleRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) {
-    return "tie";
-  } else if (
-    (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
-    (playerSelection === "PAPER" && computerSelection === "ROCK") ||
-    (playerSelection === "SCISSORS" && computerSelection === "PAPER")
-  ) {
-    return "player";
+const weaponHhtml = document.getElementById("weapons");
+
+function playerSelection(event) {
+  const clickedElement = event.target; // Element, który został kliknięty
+  
+
+  // Sprawdzamy co zostało kliknięte i zwróć odpowiednią broń
+  if (clickedElement.id === "rock") {
+    return "ROCK";
+  } else if (clickedElement.id === "paper") {
+    return "PAPER";
+  } else if (clickedElement.id === "scissors") {
+    return "SCISSORS";
   } else {
-    return "computer";
+    event.stopPropagation();
+    return null;
   }
 }
+
+function playSingleRound(playerChoice, computerChoice) {
+  if (playerChoice === computerChoice) {
+    return "Tie!";
+  } else if (
+    (computerChoice === "ROCK" && playerChoice === "SCISSORS") ||
+    (computerChoice === "SCISSORS" && playerChoice === "PAPER") ||
+    (computerChoice === "PAPER" && playerChoice === "ROCK")
+  ) {
+    return "You lost!";
+  } else {
+    return "You win!";
+  }
+}
+
+let playerScore = 0,
+  computerScore = 0;
 
 function game() {
-  let playerScore = 0,
-    computerScore = 0;
-
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = prompt("Choose your weapon: ").toUpperCase();
-    const computerSelection = getComputerChoice();
-    const winner = playSingleRound(playerSelection, computerSelection);
-
-    if (winner === "player") {
-      playerScore++;
-    } else if (winner === "computer") {
+  playerScore = 0;
+  computerScore = 0;
+  
+  weaponHhtml.addEventListener('click', function(event) {
+    const playerChoice = playerSelection(event);
+    const computerChoice = getComputerChoice();
+    
+    const result = playSingleRound(playerChoice, computerChoice);
+    
+    if (result === "You lost!") {
       computerScore++;
+    } else if (result === "You win!") {
+      playerScore++;
     }
-  }
-
-  console.log(`Score: Player - ${playerScore}, Computer - ${computerScore}`);
-
-  if (playerScore > computerScore) {
-    console.log("Player wins the game!");
-  } else if (playerScore < computerScore) {
-    console.log("Computer wins the game!");
-  } else {
-    console.log("It's a tie in the game!");
-  }
+    
+    // Aktualizacja wyniku
+    console.log(`Player Score: ${playerScore} - Computer Score: ${computerScore}`);
+    
+    // Sprawdzenie, czy któryś z graczy zdobył 5 punktów
+    if (playerScore === 5 || computerScore === 5) {
+      gameActive = false;
+      if (playerScore > computerScore) {
+        console.log("Congratulations! You win the game!");
+      } else {
+        console.log("You lost the game. Try again!");
+      }
+      
+    }
+  });
 }
 
-game();
+// na kliknięcie start uruchom grę 
+const start = document.getElementById("start");
+start.addEventListener('click', game);
