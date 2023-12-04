@@ -46,7 +46,28 @@ function game() {
   playerScore = 0;
   computerScore = 0;
   gameActive = true;
+
+  // Usun poprzednia tablice wynikow jesli istnieje
+  const existingBoard = document.getElementById('board');
+  if (existingBoard) {
+    existingBoard.parentNode.removeChild(existingBoard);
+  }
   
+
+  // Tworzę div i 2 elementy mu dodaje
+  const board = document.createElement('ul');
+  board.id = 'board';
+  const boardComputer = board.appendChild(document.createElement('li'));
+  const boardPlayer = board.appendChild(document.createElement('li'));
+
+  boardComputer.innerText = computerScore;
+  boardPlayer.innerText = playerScore;
+
+  // Dodanie elementu board do struktury DOM
+  const scoreboard = document.getElementById('scoreboard');
+  scoreboard.innerText == "SCOREBOARD";
+  scoreboard.appendChild(board);
+
   weaponHhtml.addEventListener('click', function(event) {
     if (!gameActive) return;
     const playerChoice = playerSelection(event);
@@ -62,6 +83,8 @@ function game() {
     
     // Aktualizacja wyniku
     console.log(`Player Score: ${playerScore} - Computer Score: ${computerScore}`);
+    boardComputer.innerText = computerScore;
+    boardPlayer.innerText = playerScore;
     
     // Sprawdzenie, czy któryś z graczy zdobył 5 punktów
     if (playerScore === 5 || computerScore === 5) {
@@ -88,5 +111,5 @@ start.addEventListener('click', game);
 
 // TODO:
 // 1. Wylacz mozliwosc dalszej gry po skonczonej rozgrywce DONE
-// 2. Dodac tablice wynikow
-// 3. Dodac kto jaka bron wybral 
+// 2. Dodac tablice wynikow DONE
+// 3. Dodac kto jaka bron wybral TODO
