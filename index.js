@@ -5,6 +5,7 @@ function getComputerChoice() {
   return weapons[Math.floor(Math.random() * weapons.length)];
 }
 
+let gameActive = false;
 const weaponHhtml = document.getElementById("weapons");
 
 function playerSelection(event) {
@@ -44,8 +45,10 @@ let playerScore = 0,
 function game() {
   playerScore = 0;
   computerScore = 0;
+  gameActive = true;
   
   weaponHhtml.addEventListener('click', function(event) {
+    if (!gameActive) return;
     const playerChoice = playerSelection(event);
     const computerChoice = getComputerChoice();
     
@@ -68,6 +71,11 @@ function game() {
       } else {
         console.log("You lost the game. Try again!");
       }
+
+    if (!gameActive) {
+      weaponHhtml.removeEventListener('click', this); // Usunięcie nasłuchiwacza po zakończeniu gry
+      return;
+    }
       
     }
   });
@@ -76,3 +84,9 @@ function game() {
 // na kliknięcie start uruchom grę 
 const start = document.getElementById("start");
 start.addEventListener('click', game);
+
+
+// TODO:
+// 1. Wylacz mozliwosc dalszej gry po skonczonej rozgrywce DONE
+// 2. Dodac tablice wynikow
+// 3. Dodac kto jaka bron wybral 
