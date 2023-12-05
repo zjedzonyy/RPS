@@ -1,0 +1,25 @@
+body{
+    background-color: aqua;
+    margin: 0px;
+}
+
+#container{
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+#header, #scoreboard, #start, #fight, #weapons, #footer{
+    background-color: aqua;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

@@ -72,6 +72,25 @@ function game() {
     if (!gameActive) return;
     const playerChoice = playerSelection(event);
     const computerChoice = getComputerChoice();
+
+    // Usun jesli istnieje w HTML 'fight'
+    const existingDuel = document.getElementById('duel');
+    if (existingDuel) {
+      existingDuel.parentNode.removeChild(existingDuel);
+    }
+    // Tworze list i dodaje do niej 2 elementy
+    const duel = document.createElement('ul');
+    duel.id = 'duel';
+    const duelComputer = duel.appendChild(document.createElement('li'));
+    const duelPlayer = duel.appendChild(document.createElement('li'));
+    // Dodaje co maja dodane elementy wyswietlac
+    duelComputer.innerText = computerChoice;
+    duelPlayer.innerText = playerChoice;
+    // Dodanie elementu duel do struktury DOM
+    const fight = document.getElementById('fight');
+    fight.innerText == "FIGHT!";
+    fight.appendChild(duel);
+    
     
     const result = playSingleRound(playerChoice, computerChoice);
     
@@ -112,4 +131,8 @@ start.addEventListener('click', game);
 // TODO:
 // 1. Wylacz mozliwosc dalszej gry po skonczonej rozgrywce DONE
 // 2. Dodac tablice wynikow DONE
-// 3. Dodac kto jaka bron wybral TODO
+// 3. Dodac kto jaka bron wybral DONE
+// 4. Jak zrobie GUI to po rozegranej rundzie podswietlic wyskakujacego div w kolorze:
+// zielony : win; czerwony : lose; pomaranczowy : remis;
+// 5. FLEXBOX
+// 6. Nwm cos upiekszyc?
