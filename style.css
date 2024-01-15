@@ -1,25 +1,107 @@
-body{
-    background-color: aqua;
-    margin: 0px;
-}
-
-#container{
-    width: 100vw;
-    height: 100vh;
-    padding: 10px;
-    background-color: red;
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-#header, #scoreboard, #start, #fight, #weapons, #footer{
-    background-color: aqua;
-    width: 500px;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#container {
     text-align: center;
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    font-family: 'Brush Script MT';
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#scoreboard {
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    display: none
+}
+
+#scoreboard div {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+
+button {
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#fight {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+#fight div{
+    flex: 1;
+}
+
+#weapons button {
+    width: 130px; /* Ustawienie stałej szerokości dla przycisków */
+}
+
+#footer {
+    font-size: 14px;
+    color: #777;
+    margin-top: 20px;
+}
+
+#duel {
+    display: flex;
+    justify-content: space-between;
+    background: #e9e9e9;
+    border: 1px solid #ddd;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.duel-part {
+    flex: 1;
+    margin: 0 10px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+#fight {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }

@@ -55,10 +55,11 @@ function game() {
   
 
   // Tworzę div i 2 elementy mu dodaje
-  const board = document.createElement('ul');
+  const board = document.createElement('div');
   board.id = 'board';
-  const boardComputer = board.appendChild(document.createElement('li'));
-  const boardPlayer = board.appendChild(document.createElement('li'));
+  board.appendChild(document.createElement('div'))
+  const boardComputer = board.appendChild(document.createElement('div'));
+  const boardPlayer = board.appendChild(document.createElement('div'));
 
   boardComputer.innerText = computerScore;
   boardPlayer.innerText = playerScore;
@@ -79,10 +80,10 @@ function game() {
       existingDuel.parentNode.removeChild(existingDuel);
     }
     // Tworze list i dodaje do niej 2 elementy
-    const duel = document.createElement('ul');
+    const duel = document.createElement('div');
     duel.id = 'duel';
-    const duelComputer = duel.appendChild(document.createElement('li'));
-    const duelPlayer = duel.appendChild(document.createElement('li'));
+    const duelComputer = duel.appendChild(document.createElement('div'));
+    const duelPlayer = duel.appendChild(document.createElement('div'));
     // Dodaje co maja dodane elementy wyswietlac
     duelComputer.innerText = computerChoice;
     duelPlayer.innerText = playerChoice;
@@ -122,6 +123,19 @@ function game() {
     }
   });
 }
+
+document.getElementById("start").addEventListener('click', function() {
+  document.getElementById("scoreboard").style.display = 'flex';
+  this.textContent = "RESTART";
+  document.body.style.backgroundColor = '#ececec';
+// przechwyc kontener dla broni i footer
+  var weaponsDiv = document.getElementById('weapons');
+  var footerDiv = document.getElementById('footer');
+  // przeniesc przycisk start game i umiesc go pomiedzy weapons i footer
+  // przy uzyciu insertBefore na rodzicu elementu 'footer'
+  footerDiv.parentNode.insertBefore(this, footerDiv);
+
+})
 
 // na kliknięcie start uruchom grę 
 const start = document.getElementById("start");
